@@ -1,27 +1,35 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Cliente;
-import com.example.demo.repository.ClienteRepository;
-import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class ClienteService {
-    private final ClienteRepository repository;
-
-    public ClienteService(ClienteRepository repository) {
-        this.repository = repository;
-    }
-
-    public List<Cliente> listar() {
-        return repository.findAll();
-    }
-
-    public Cliente guardar(Cliente cliente) {
-        return repository.save(cliente);
-    }
-
-    public void eliminar(Long id) {
-        repository.deleteById(id);
-    }
+public interface ClienteService {
+    
+    // Crear o actualizar cliente
+    Cliente guardarCliente(Cliente cliente);
+    
+    // Obtener todos los clientes
+    List<Cliente> obtenerTodosLosClientes();
+    
+    // Obtener cliente por ID
+    Optional<Cliente> obtenerClientePorId(Integer id);
+    
+    // Obtener cliente por correo
+    Optional<Cliente> obtenerClientePorCorreo(String correo);
+    
+    // Obtener cliente por cookie ID
+    Optional<Cliente> obtenerClientePorCookieId(String cookieId);
+    
+    // Verificar si existe cliente por correo
+    boolean existeClientePorCorreo(String correo);
+    
+    // Buscar cliente por nombre
+    Optional<Cliente> buscarClientePorNombre(String nombre);
+    
+    // Eliminar cliente por ID
+    void eliminarCliente(Integer id);
+    
+    // Actualizar cliente
+    Cliente actualizarCliente(Integer id, Cliente cliente);
 }
